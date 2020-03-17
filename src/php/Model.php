@@ -64,8 +64,15 @@ class Model {
         }
     }
 
-    public static function addBook
+    /*public static function addAdherent($name) {
+        	$sql = "INSERT INTO `adherent`(`idAdherent`, `nomAdherent`) VALUES ([value+1],$name)";
+        	if (!mysql_query($sql,$con)) {
+    			die('impossible d’ajouter cet enregistrement : ' . mysql_error());
+    		}
+    		echo "L’enregistrement est ajouté ";
 
+    		mysql_close($con)
+    }*/
 }
 
 // on initialise la connexion $pdo

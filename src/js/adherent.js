@@ -37,33 +37,15 @@ function requeteAllAdherent() {
     requete.send(null);
 }
 
-function createInstance() {
-    if(window.XMLHttpRequest) {
-        // Pour Chrome, Firefox, Opera
-        return new XMLHttpRequest();
-    } else if(window.ActiveXObject) {
-        // Pour Internet Explorer
-        var names = [
-            "Msxml2.XMLHTTP.6.0",
-            "Msxml2.XMLHTTP.3.0",
-            "Msxml2.XMLHTTP",
-            "Microsoft.XMLHTTP"
-        ];
-        for(var i in names) {
-            try {
-                return new ActiveXObject(names[i]);
-            }
-            catch(e){}
-        }
-        alert("Non supporte");
-        return null;
-    }
-}
-
-function sendData() {
-    var req = createInstance();
-    // Recuperation de la donnee
-    var donneeClient = document.
+function requeteAddAdherent() {
+    let url = "php/addAdherent.php";
+    let requete = new XMLHttpRequest();
+    requete.open("GET", url, true);
+    requete.addEventListener("load", function() {
+        let data = JSON.parse(requete.responseText);
+        echo("Adherent ajouté !");
+    });
+    requete.send(null);
 }
 
 
