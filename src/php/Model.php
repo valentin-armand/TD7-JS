@@ -24,6 +24,48 @@ class Model {
         }
     }
 
+    public static function selectAllAdherent(){
+            try {
+                $sql = "SELECT adherent.idAdherent, nomAdherent, COUNT(emprunt.idAdherent) AS nbEmprunt FROM adherent LEFT JOIN emprunt ON emprunt.idAdherent = adherent.idAdherent GROUP BY idAdherent";
+                $rep = Model::$pdo->query($sql);
+                $rep->setFetchMode(PDO::FETCH_CLASS, 'Model');
+                $tab = $rep->fetchAll();
+                return $tab;
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+                die("Erreur lors de la recherche dans la base de données.");
+            }
+    }
+
+    public static function selectAllLivre(){
+            try {
+                $sql = "SELECT livre.idLivre, titreLivre FROM livre LEFT JOIN emprunt ON livre.idLivre = emprunt.idLivre WHERE emprunt.idLivre IS NULL";
+                $rep = Model::$pdo->query($sql);
+                $rep->setFetchMode(PDO::FETCH_CLASS, 'Model');
+                $tab = $rep->fetchAll();
+                return $tab;
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+                die("Erreur lors de la recherche dans la base de données.");
+            }
+    }
+
+    public static function selectAllEmprunt() {
+        try {
+            $sql = "SELECT `livre`.`titreLivre` AS titreLivre, emprunt.* FROM emprunt INNER JOIN livre
+                                                                                                    ON `emprunt`.`idLivre` = `livre`.`idLivre`";
+            $rep = Model::$pdo->query($sql);
+            $rep->setFetchMode(PDO::FETCH_CLASS, 'Model');
+           $tab = $rep->fetchAll();
+           return $tab;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données. ");
+        }
+    }
+
+    public static function addBook
+
 }
 
 // on initialise la connexion $pdo

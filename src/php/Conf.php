@@ -5,8 +5,8 @@ class Conf {
     private static $database = array(
         'hostname' => 'localhost',
         'database' => 'td7',
-        'login'    => 'root', // à compléter avec vos données personnelles
-        'password' => ''  // à compléter avec vos données personnelles
+        'login'    => 'root',
+        'password' => ''
     );
 
     static public function getLogin() {
