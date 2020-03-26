@@ -64,16 +64,6 @@ class Model {
         }
     }
 
-    /*public static function addAdherent($name) {
-        	$sql = "INSERT INTO `adherent`(`idAdherent`, `nomAdherent`) VALUES ([value+1],$name)";
-        	if (!mysql_query($sql,$con)) {
-    			die('impossible d’ajouter cet enregistrement : ' . mysql_error());
-    		}
-    		echo "L’enregistrement est ajouté ";
-
-    		mysql_close($con)
-    }*/
-
     public static function addAdherent($nomAdherent){
             try {
                 $sql = 'INSERT INTO adherent (nomAdherent) VALUES (:nomAdherent_tag)';
@@ -86,6 +76,19 @@ class Model {
                 die("Erreur lors de la creation dans la base de données.");
             }
     }
+
+    public static function addLivre($titreLivre){
+                try {
+                    $sql = 'INSERT INTO livre (titreLivre) VALUES (:titreLivre_tag)';
+                    $values = array(':titreLivre_tag' => $titreLivre);
+                    $rep_prep = Model::$pdo->prepare($sql);
+                    $rep_prep->execute($values);
+                }
+                catch(PDOException $e) {
+                    echo $e->getMessage();
+                    die("Erreur lors de la creation dans la base de données.");
+                }
+        }
 
     public static function empruntLivre($idAdherent, $idLivre) {
         try {

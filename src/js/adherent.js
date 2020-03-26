@@ -37,17 +37,6 @@ function requeteAllAdherent() {
     requete.send(null);
 }
 
-function requeteAddAdherent2() {
-    let url = "php/addAdherent2.php";
-    let requete = new XMLHttpRequest();
-    requete.open("GET", url, true);
-    /*requete.addEventListener("load", function() {
-        let data = JSON.parse(requete.responseText);
-    });*/
-    requete.send(null);
-    alert("Adhérent ajouté !");
-}
-
 function requeteAddAdherent(nomAdherent){
     let url = "php/addAdherent.php?nomAdherent=" + nomAdherent;
     let requete = new XMLHttpRequest();
