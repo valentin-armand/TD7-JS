@@ -2,9 +2,10 @@
 
 require_once('Model.php');
 
-// lancement de la requête SQL avec selectByName et
-// récupération du résultat de la requête SQL
-$requete = Model::addAdherent();
+$nomAdherent = $_GET['nomAdherent'];
 
-// affichage en format JSON du résultat précédent
+Model::addAdherent($nomAdherent);
+
+$requete = Model::selectAllAdherent();
+
 echo json_encode($requete);

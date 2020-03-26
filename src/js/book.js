@@ -64,5 +64,9 @@ function requeteAllEmprunt() {
     requete.send(null);
 }
 
+function empruntLivre(idLivre, titreLivre) {
+    let idAdherent =
+}
+
 document.addEventListener('DOMContentLoaded', requeteAllLivre());
 document.addEventListener('DOMContentLoaded', requeteAllEmprunt());

@@ -73,6 +73,43 @@ class Model {
 
     		mysql_close($con)
     }*/
+
+    public static function addAdherent($nomAdherent){
+            try {
+                $sql = 'INSERT INTO adherent (nomAdherent) VALUES (:nomAdherent_tag)';
+                $values = array(':nomAdherent_tag' => $nomAdherent);
+                $rep_prep = Model::$pdo->prepare($sql);
+                $rep_prep->execute($values);
+            }
+            catch(PDOException $e) {
+                echo $e->getMessage();
+                die("Erreur lors de la creation dans la base de données.");
+            }
+    }
+
+    public static function empruntLivre($idAdherent, $idLivre) {
+        try {
+            $sql = 'INSERT INTO emprunt (idAdherent, idLivre) VALUES (:idAdherent_tag, :idLivre_tag)';
+            $values = array('idAdherent_tag' => $idAdherent, ':idLivre_tag' => $idLivre);
+            $rep_prep = Model::$pdo->prepare($sql);
+            $rep_prep->execute($values);
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+            die("Une erreur est survenue dans la base de données");
+        }
+    }
+
+    public static function returnLivre($idLivre) {
+        try {
+            $sql = 'DELETE FROM emprunt WHERE idLivre = :idLivre_tag';
+            $values = array(':idLivre_tag' => $idLivre);
+            $rep_prep = Model::$pdo->prepare($sql);
+            $rep_prep->execute($values);
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+            die("Une erreur est survenue dans la base de données");
+        }
+    }
 }
 
 // on initialise la connexion $pdo

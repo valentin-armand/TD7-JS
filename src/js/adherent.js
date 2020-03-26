@@ -37,16 +37,32 @@ function requeteAllAdherent() {
     requete.send(null);
 }
 
-function requeteAddAdherent() {
-    let url = "php/addAdherent.php";
+function requeteAddAdherent2() {
+    let url = "php/addAdherent2.php";
     let requete = new XMLHttpRequest();
     requete.open("GET", url, true);
-    requete.addEventListener("load", function() {
+    /*requete.addEventListener("load", function() {
         let data = JSON.parse(requete.responseText);
-        echo("Adherent ajouté !");
-    });
+    });*/
     requete.send(null);
+    alert("Adhérent ajouté !");
 }
 
+function requeteAddAdherent(nomAdherent){
+    let url = "php/addAdherent.php?nomAdherent=" + nomAdherent;
+    let requete = new XMLHttpRequest();
+    requete.open("GET", url, true);
+    requete.addEventListener("load", function () {
+        let data = JSON.parse(requete.responseText);
+        printAllAdherent(data);
+    });
+    requete.send(null);
+    document.getElementById('nomAdherent').value = '';
+}
+
+
+function test() {
+    console.log("Test");
+}
 
 document.addEventListener('DOMContentLoaded', requeteAllAdherent());

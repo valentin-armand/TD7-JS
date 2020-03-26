@@ -5,7 +5,6 @@
 	<title>médiathèque JS</title>
 	<link rel="icon" href="img/book.ico" />
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
-	<script type="text/javascript" src="js/script.js" defer></script>
 	<script type="text/javascript" src="js/adherent.js" defer></script>
 	<script type="text/javascript" src="js/book.js" defer></script>
 </head>
@@ -16,7 +15,7 @@
 			<fieldset>
 				<legend>nouvel adhérent</legend>
 				<input type="text" id="nomAdherent" placeholder="nom...">
-				<input type="button" onclick="requeteAddAdherent()" id="ajouterAdherent" value="ajouter">
+				<input type="button" onclick="requeteAddAdherent(getElementById('nomAdherent').value)" id="ajouterAdherent" value="Ajouter">
 			</fieldset>
 		</div>
 		<div id="ajoutLivre">
