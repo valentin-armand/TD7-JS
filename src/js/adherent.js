@@ -1,3 +1,7 @@
+function selectAdherent(idAdherent, nomAdherent, nbEmprunt) {
+    requeteSelectAdherent(idAdherent, nomAdherent, nbEmprunt);
+}
+
 function printAllAdherent(adherents) {
     emptyAdherent();
     let div = document.getElementById('listeAdherents');
@@ -47,6 +51,32 @@ function requeteAddAdherent(nomAdherent){
     });
     requete.send(null);
     document.getElementById('nomAdherent').value = '';
+}
+
+function requeteSelectAdherent(idAdherent, nomAdherent, nbEmprunt) {
+    let url = "php/selectAdherent.php?idAdherent=" + idAdherent;
+    let requete = new XMLHttpRequest();
+    requete.open("GET", url, true);
+    requete.addEventListener("load", function() {
+        let data = JSON.parse(requete.responseText);
+        printAdherent(idAdherent, nomAdherent, nbEmprunt, data)
+    });
+    requete.send(null);
+}
+
+function printAdherent(idAdherent, nomAdherent, nbEmprunt, data) {
+    console.log(nbEmprunt);
+    let str = "";
+    if (nbEmprunt === 0) {
+        str += nomAdherent + ' ne possède pas d\'emprunt actuellement';
+    } else {
+        str += nomAdherent + 'possède' + nbEmprunt + 'emprunt(s) actuellement';
+        for (elt in data) {
+            str += "\n- " + data[elt].titreLivre;
+        }
+    }
+    console.log(str);
+    alert(str);
 }
 
 

@@ -6,7 +6,7 @@ function printAllLivre(livres) {
         let idLivre = elt.idLivre;
         let titreLivre = elt.titreLivre;
         il.addEventListener('click', () => {
-            selectLivre(idLivre, titreLivre);
+            requeteAllLivre(idLivre, titreLivre);
         });
         il.innerText = elt.idLivre + "-" + elt.titreLivre;
         div.appendChild(il);
@@ -27,6 +27,21 @@ function requeteAllLivre() {
     requete.addEventListener("load", function () {
         let data = JSON.parse(requete.responseText);
         printAllLivre(data);
+    });
+    requete.send(null);
+}
+
+function requeteAllLivres(type) {
+    let url = "php/selectAllLivre.php" + type;
+    let requete = new XMLHttpRequest();
+    requete.open("GET", url, true);
+    requete.addEventListener("load", function () {
+        let data = JSON.parse(requete.responseText);
+        if(type === 'disponible') {
+            printAllLivre(data);
+        } else {
+          printAllEmprunt(data);
+        }
     });
     requete.send(null);
 }
@@ -74,6 +89,16 @@ function requeteAllEmprunt() {
         printAllEmprunt(data);
     });
     requete.send(null);
+}
+
+function requeteEmpruntLivre(idAdherent, idLivre) {
+    let url = "php/empruntLivre.php?idAdherent=" + idAdherent + "&idLivre" + idLivre;
+    let requete = new XMLHttpRequest();
+    requete.open("GET", url, true);
+    requete.send(null);
+    requetAllAdherent();
+    requeteAllLivres('emprunte');
+    requeteAllLivres('disponible');
 }
 
 function empruntLivre(idLivre, titreLivre) {
