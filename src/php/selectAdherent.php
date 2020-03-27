@@ -2,10 +2,10 @@
 
 require_once('Model.php');
 
-$nomAdherent = $_GET['idAdherent'];
+$idAdherent = $_GET['idAdherent'];
 
-Model::selectAdherent($idAdherent);
 
-$requete = Model::selectAdherent();
+
+$requete = Model::selectAdherent($idAdherent);
 
 echo json_encode($requete);

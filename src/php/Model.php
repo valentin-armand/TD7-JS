@@ -116,7 +116,7 @@ class Model {
 
     public static function selectAdherent($idAdherent) {
         try {
-            $sql = 'SELECT titreLivre FROM livre JOIN emprunt ON emprunt.idLivre = livre.idLivre JOIN adherent ON adherent.idAdherent = emprunt.idAdherent WHERE adherent.idAdherent = '.$idAdherent;
+            $sql = 'SELECT titreLivre FROM livre JOIN emprunt ON emprunt.idLivre = livre.idLivre JOIN adherent ON adherent.idAdherent = emprunt.idAdherent WHERE adherent.idAdherent = '. $idAdherent;
             $rep = Model::$pdo->query($sql);
             $rep->setFetchMode(PDO::FETCH_CLASS, 'Model');
             $tab = $rep->fetchAll();
@@ -129,7 +129,21 @@ class Model {
 
     public static function getAdherentByIdLivre($idLivre) {
         try {
-            $sql = 'SELECT nomAdherent FROM adherent JOIN emprunt ON emprunt.idAdherent = adherent.idAdherent = adherent.idAdherent JOIN livre ON livre.idLivre = emprunt.idLivre WHERE livre.idLivre = ' .$idLivre;
+            $sql = 'SELECT nomAdherent FROM adherent JOIN emprunt ON emprunt.idAdherent = adherent.idAdherent = adherent.idAdherent JOIN livre ON livre.idLivre = emprunt.idLivre WHERE livre.idLivre = ' . $idLivre;
+            $rep = Model::$pdo->query($sql);
+            $rep->setFetchMode(PDO::FETCH_CLASS, 'Model');
+            $tab = $rep->fetchAll();
+            return $tab;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur base de données");
+        }
+    }
+
+
+    public static function getidLivreBytitreLivre($titreLivre) {
+        try {
+            $sql = 'SELECT idLivre, titreLivre FROM livre WHERE titreLivre =' .  $titreLivre;
             $rep = Model::$pdo->query($sql);
             $rep->setFetchMode(PDO::FETCH_CLASS, 'Model');
             $tab = $rep->fetchAll();

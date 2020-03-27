@@ -66,7 +66,7 @@ function printAllEmprunt(emprunts) {
         let idAdherent = elt.idAdherent;
         let idLivre = elt.idLivre;
         il.addEventListener('click', () => {
-            selectEmprunt(idAdherent, idLivre);
+            requeteEmpruntLivre(idAdherent, idLivre);
         });
         il.innerText = elt.idLivre + "-" + elt.titreLivre;
         div.appendChild(il);
@@ -96,7 +96,7 @@ function requeteEmpruntLivre(idAdherent, idLivre) {
     let requete = new XMLHttpRequest();
     requete.open("GET", url, true);
     requete.send(null);
-    requetAllAdherent();
+    requeteAllAdherent();
     requeteAllLivres('emprunte');
     requeteAllLivres('disponible');
 }
@@ -105,7 +105,7 @@ function empruntLivre(idLivre, titreLivre) {
     let idAdherent = prompt("Le livre \"" + titreLivre + "\"\nN° de l'emprunteur : ");
     if(idAdherent != null && idLivre != null) {
         requeteEmpruntLivre(idAdherent, idLivre);
-        requeteAlleAdherent();
+        requeteAllAdherent();
         requeteAllLivres('emprunte');
         requeteAllLivres('disponible');
     } else {

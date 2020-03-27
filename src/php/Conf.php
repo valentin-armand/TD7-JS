@@ -3,10 +3,10 @@
 class Conf {
 
     private static $database = array(
-        'hostname' => 'localhost',
-        'database' => 'td7',
-        'login'    => 'root',
-        'password' => ''
+        'hostname' => 'webinfo.iutmontp.univ-montp2.fr',
+        'database' => 'briandj',
+        'login'    => 'briandj',
+        'password' => 'z0oAGp8Q9TMxJx64'
     );
 
     static public function getLogin() {
